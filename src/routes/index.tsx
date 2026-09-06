@@ -49,7 +49,7 @@ const tracks = [
   { title: "Hia", artist: "Sān-Z", src: hia.url },
   { title: "争流口岸", artist: "Sān-Z", src: strivingPort.url },
   { title: "Reverie · Passion", artist: "Sān-Z", src: reveriePassion.url },
-];
+] as const;
 
 function formatTime(seconds: number) {
   if (!Number.isFinite(seconds)) return "0:00";
