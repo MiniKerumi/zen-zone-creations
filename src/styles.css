@@ -151,6 +151,57 @@
   ::selection { background: var(--color-accent); color: var(--color-accent-foreground); }
 }
 
+@keyframes signal-in {
+  0% { opacity: 0; transform: translateY(28px); filter: blur(8px); }
+  65% { opacity: 1; transform: translateY(-2px); filter: blur(0); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scan-pass {
+  from { transform: translateY(-100%); }
+  to { transform: translateY(100vh); }
+}
+
+@keyframes cover-pulse {
+  50% { transform: scale(1.06); filter: saturate(1.2); }
+}
+
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(26px);
+}
+
+[data-reveal].is-visible {
+  animation: signal-in 700ms cubic-bezier(.2,.75,.2,1) both;
+  animation-delay: var(--reveal-delay, 0ms);
+}
+
+.hero-drift { animation: cover-pulse 12s ease-in-out infinite; }
+.cover-pulse { animation: cover-pulse 2.4s ease-in-out infinite; }
+.scanline {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--color-primary), var(--color-secondary), transparent);
+  opacity: .7;
+  animation: scan-pass 6s linear infinite;
+}
+
+.art-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  border-top: 2px solid transparent;
+  transition: border-color 220ms ease, box-shadow 220ms ease;
+}
+
+.art-card:hover::before { border-color: var(--color-primary); box-shadow: inset 0 1px 20px color-mix(in oklab, var(--color-primary) 20%, transparent); }
+.music-range { height: 3px; cursor: pointer; accent-color: var(--color-accent); }
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+  [data-reveal] { opacity: 1; transform: none; }
 }
