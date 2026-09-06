@@ -63,7 +63,7 @@ function Index() {
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const audioRef = useRef<HTMLAudioElement>(null);
-  const currentTrack = tracks[trackIndex];
+  const currentTrack = tracks[trackIndex] ?? tracks[0];
 
   useEffect(() => {
     if (!activeWork) return;
