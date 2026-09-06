@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ArrowDown, Expand, X } from "lucide-react";
-import { useEffect, useState } from "react";
+import { ArrowDown, Expand, Music2, Pause, Play, SkipBack, SkipForward, Volume2, X } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import zenara from "@/assets/zenara-light.png.asset.json";
@@ -9,6 +9,14 @@ import dualSignal from "@/assets/dual-signal.png.asset.json";
 import cityPair from "@/assets/city-pair.png.asset.json";
 import firstGfx from "@/assets/first-gfx.png.asset.json";
 import afterHours from "@/assets/after-hours.png.asset.json";
+import bgmCover from "@/assets/bgm-cover.png.asset.json";
+import dailyLifeLeisure from "@/assets/daily-life-leisure.mp3.asset.json";
+import dailyLifeFreedom from "@/assets/daily-life-freedom.mp3.asset.json";
+import reverieSerenity from "@/assets/reverie-serenity.mp3.asset.json";
+import vr from "@/assets/vr.mp3.asset.json";
+import hia from "@/assets/hia.mp3.asset.json";
+import strivingPort from "@/assets/striving-port.mp3.asset.json";
+import reveriePassion from "@/assets/reverie-passion.mp3.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -25,16 +33,37 @@ export const Route = createFileRoute("/")({
 });
 
 const works = [
-  { title: "Zenara Light", tag: "Portrait / Lighting", src: zenara.url, alt: "Stylized character portrait illuminated by cyan and magenta light", span: "md:col-span-2" },
-  { title: "Crimson Elegance", tag: "Character Study", src: crimson.url, alt: "Full-length fantasy character in a red, black, and white outfit", span: "md:row-span-2" },
-  { title: "Dual Signal", tag: "Crossover Composition", src: dualSignal.url, alt: "Two stylized action characters posed together against a dark backdrop", span: "" },
-  { title: "City Pair", tag: "Cinematic Moment", src: cityPair.url, alt: "Two animated characters smiling together in a softly lit city interior", span: "" },
-  { title: "First Signal", tag: "First GFX / Action", src: firstGfx.url, alt: "Armed character suspended above a colorful urban street", span: "md:col-span-2" },
-  { title: "After Hours", tag: "Scene Study", src: afterHours.url, alt: "Two characters posing in a warmly lit room", span: "" },
+  { title: "Professor Zenara", tag: "Portrait / Lighting", src: zenara.url, alt: "Professor Zenara portrait illuminated by cyan and magenta light", span: "md:col-span-2" },
+  { title: "Hsin the Moon Fox", tag: "Character Study", src: crimson.url, alt: "Hsin the Moon Fox in a red, black, and white outfit", span: "md:row-span-2" },
+  { title: "Mesa & Billy", tag: "Crossover Composition", src: dualSignal.url, alt: "Mesa and Billy posed together against a dark backdrop", span: "" },
+  { title: "Ramielle & Wise", tag: "Cinematic Moment", src: cityPair.url, alt: "Ramielle and Wise smiling together in a softly lit city interior", span: "" },
+  { title: "Trigger", tag: "First GFX / ZZZ", src: firstGfx.url, alt: "Trigger suspended above a colorful urban street", span: "md:col-span-2" },
+  { title: "Nicole & Lucy", tag: "Scene Study", src: afterHours.url, alt: "Nicole and Lucy posing in a warmly lit room", span: "" },
 ];
+
+const tracks = [
+  { title: "Daily Life · Leisure", artist: "Sān-Z / HOYO-MiX", src: dailyLifeLeisure.url },
+  { title: "Daily Life · Freedom", artist: "Sān-Z", src: dailyLifeFreedom.url },
+  { title: "Reverie · Serenity", artist: "Sān-Z", src: reverieSerenity.url },
+  { title: "Vr", artist: "Sān-Z", src: vr.url },
+  { title: "Hia", artist: "Sān-Z", src: hia.url },
+  { title: "争流口岸", artist: "Sān-Z", src: strivingPort.url },
+  { title: "Reverie · Passion", artist: "Sān-Z", src: reveriePassion.url },
+] as const;
+
+function formatTime(seconds: number) {
+  if (!Number.isFinite(seconds)) return "0:00";
+  return `${Math.floor(seconds / 60)}:${Math.floor(seconds % 60).toString().padStart(2, "0")}`;
+}
 
 function Index() {
   const [activeWork, setActiveWork] = useState<(typeof works)[number] | null>(null);
+  const [trackIndex, setTrackIndex] = useState(0);
+  const [playing, setPlaying] = useState(false);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const audioRef = useRef<HTMLAudioElement>(null);
+  const currentTrack = tracks[trackIndex] ?? tracks[0];
 
   useEffect(() => {
     if (!activeWork) return;
@@ -46,6 +75,27 @@ function Index() {
       document.body.style.overflow = "";
     };
   }, [activeWork]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => entries.forEach((entry) => entry.isIntersecting && entry.target.classList.add("is-visible")),
+      { threshold: 0.12 },
+    );
+    document.querySelectorAll("[data-reveal]").forEach((element) => observer.observe(element));
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+    if (playing) audio.play().catch(() => setPlaying(false));
+    else audio.pause();
+  }, [playing, trackIndex]);
+
+  const changeTrack = (direction: number) => {
+    setTrackIndex((current) => (current + direction + tracks.length) % tracks.length);
+    setCurrentTime(0);
+  };
 
   return (
     <main className="min-h-screen bg-background text-foreground">
@@ -62,10 +112,11 @@ function Index() {
       </nav>
 
       <header id="top" className="relative flex min-h-[92vh] items-end overflow-hidden border-b border-border">
-        <img src={zenara.url} alt="Zenara Light character portrait by MiniKerumi" className="absolute inset-0 h-full w-full object-cover object-[64%_center]" />
+        <img src={zenara.url} alt="Professor Zenara character portrait by MiniKerumi" className="hero-drift absolute inset-0 h-full w-full object-cover object-[64%_center]" />
+        <div className="scanline" aria-hidden="true" />
         <div className="absolute inset-0 bg-gradient-to-r from-background via-background/65 to-background/10" />
         <div className="absolute inset-x-0 top-16 h-px bg-primary/50" />
-        <div className="relative z-10 mx-auto w-full max-w-[92rem] px-5 pb-16 pt-32 lg:px-10 lg:pb-20">
+        <div className="relative z-10 mx-auto w-full max-w-[92rem] px-5 pb-16 pt-32 lg:px-10 lg:pb-20" data-reveal>
           <p className="mb-4 flex items-center gap-3 text-xs font-bold uppercase text-primary"><span className="h-px w-10 bg-primary" /> Digital practice log · 2026</p>
           <h1 className="max-w-4xl font-display text-[clamp(5rem,15vw,13rem)] leading-[0.78] tracking-normal text-foreground">MINI<br /><span className="text-transparent [-webkit-text-stroke:2px_var(--color-foreground)]">KERUMI</span></h1>
           <div className="mt-8 flex flex-col items-start gap-6 sm:flex-row sm:items-end sm:gap-12">
@@ -81,7 +132,7 @@ function Index() {
         </div>
       </header>
 
-      <section id="about" className="border-b border-border py-20 lg:py-28">
+      <section id="about" className="border-b border-border py-20 lg:py-28" data-reveal>
         <div className="mx-auto grid max-w-[92rem] gap-10 px-5 lg:grid-cols-[0.7fr_1.5fr] lg:px-10">
           <div><p className="text-xs font-bold uppercase text-secondary">01 / About</p><h2 className="mt-3 font-display text-6xl tracking-normal sm:text-8xl">STILL<br />CREATING.</h2></div>
           <div className="max-w-3xl self-end border-l border-primary pl-6 sm:pl-10">
@@ -93,13 +144,13 @@ function Index() {
 
       <section id="works" className="py-20 lg:py-28">
         <div className="mx-auto max-w-[92rem] px-5 lg:px-10">
-          <div className="mb-10 flex items-end justify-between border-b border-border pb-5">
+          <div className="mb-10 flex items-end justify-between border-b border-border pb-5" data-reveal>
             <div><p className="text-xs font-bold uppercase text-primary">02 / Selected Works</p><h2 className="mt-2 font-display text-6xl tracking-normal sm:text-8xl">FRAME BY FRAME</h2></div>
             <span className="hidden text-sm font-semibold text-muted-foreground sm:block">06 PIECES / PERSONAL STUDIES</span>
           </div>
           <div className="grid auto-rows-[18rem] grid-cols-1 gap-4 md:grid-cols-3 md:auto-rows-[22rem]">
             {works.map((work, index) => (
-              <article key={work.title} className={`group relative overflow-hidden border border-border bg-card ${work.span}`}>
+              <article key={work.title} data-reveal style={{ "--reveal-delay": `${index * 70}ms` } as React.CSSProperties} className={`art-card group relative overflow-hidden border border-border bg-card ${work.span}`}>
                 <img src={work.src} alt={work.alt} loading={index > 1 ? "lazy" : "eager"} className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.025]" />
                 <div className="absolute inset-x-0 bottom-0 flex items-end justify-between bg-gradient-to-t from-background via-background/75 to-transparent p-5 pt-20">
                   <div><p className="text-xs font-semibold uppercase text-primary">{work.tag}</p><h3 className="font-display text-3xl tracking-normal">{work.title}</h3></div>
@@ -111,7 +162,7 @@ function Index() {
         </div>
       </section>
 
-      <section id="tools" className="border-y border-border bg-card py-20">
+      <section id="tools" className="border-y border-border bg-card py-20" data-reveal>
         <div className="mx-auto grid max-w-[92rem] gap-12 px-5 md:grid-cols-2 lg:px-10">
           <div><p className="text-xs font-bold uppercase text-secondary">03 / Practice & Tools</p><h2 className="mt-3 font-display text-6xl tracking-normal sm:text-8xl">BUILT TO<br />LEARN.</h2></div>
           <div className="self-end">
@@ -121,14 +172,44 @@ function Index() {
         </div>
       </section>
 
-      <aside className="border-b border-border py-14">
+      <aside className="border-b border-border py-14" data-reveal>
         <div className="mx-auto max-w-[92rem] px-5 lg:px-10">
           <p className="mb-3 text-xs font-bold uppercase text-accent">Credits & Disclaimer</p>
           <p className="max-w-5xl text-sm leading-6 text-muted-foreground">All compositions, lighting, posing, and renders shown here were created by MiniKerumi. Character designs, 3D models, and related intellectual property belong to their respective owners and creators. This is a non-commercial fan portfolio created for practice and personal expression. No official affiliation or endorsement is implied.</p>
         </div>
       </aside>
 
-      <footer className="mx-auto flex max-w-[92rem] flex-col gap-3 px-5 py-8 text-sm sm:flex-row sm:items-center sm:justify-between lg:px-10"><span className="font-display text-2xl">MINIKERUMI</span><span className="text-muted-foreground">Personal, non-commercial portfolio.</span></footer>
+      <footer className="mx-auto mb-28 flex max-w-[92rem] flex-col gap-3 px-5 py-8 text-sm sm:flex-row sm:items-center sm:justify-between lg:px-10"><span className="font-display text-2xl">MINIKERUMI</span><span className="text-muted-foreground">Personal, non-commercial portfolio.</span></footer>
+
+      <section aria-label="Background music player" className="fixed bottom-3 left-1/2 z-40 w-[calc(100%-1.5rem)] max-w-2xl -translate-x-1/2 border border-primary/60 bg-popover/95 shadow-[6px_6px_0_var(--color-secondary)] backdrop-blur-xl">
+        <audio
+          ref={audioRef}
+          src={currentTrack.src}
+          preload="metadata"
+          onTimeUpdate={(event) => setCurrentTime(event.currentTarget.currentTime)}
+          onLoadedMetadata={(event) => setDuration(event.currentTarget.duration)}
+          onEnded={() => changeTrack(1)}
+        />
+        <div className="flex h-[76px] items-center gap-3 p-2 sm:gap-4">
+          <div className="relative h-[58px] w-[58px] shrink-0 overflow-hidden border border-foreground/30">
+            <img src={bgmCover.url} alt="Background music cover artwork" className={`h-full w-full object-cover ${playing ? "cover-pulse" : ""}`} />
+            <Music2 className="absolute bottom-1 right-1 h-4 w-4 bg-background/80 p-0.5 text-accent" aria-hidden="true" />
+          </div>
+          <div className="min-w-0 flex-1">
+            <div className="flex items-baseline justify-between gap-2">
+              <div className="min-w-0"><p className="truncate text-xs font-bold uppercase text-primary">{currentTrack.title}</p><p className="truncate text-[11px] text-muted-foreground">{currentTrack.artist} · {trackIndex + 1}/{tracks.length}</p></div>
+              <span className="hidden text-[10px] tabular-nums text-muted-foreground sm:block">{formatTime(currentTime)} / {formatTime(duration)}</span>
+            </div>
+            <input aria-label="Seek through current track" type="range" min="0" max={duration || 0} value={currentTime} onChange={(event) => { const value = Number(event.target.value); setCurrentTime(value); if (audioRef.current) audioRef.current.currentTime = value; }} className="music-range mt-2 w-full" />
+          </div>
+          <div className="flex shrink-0 items-center">
+            <Button variant="ghost" size="icon" onClick={() => changeTrack(-1)} aria-label="Previous track" className="rounded-none"><SkipBack /></Button>
+            <Button size="icon" onClick={() => setPlaying((value) => !value)} aria-label={playing ? "Pause music" : "Play music"} className="rounded-none bg-accent text-accent-foreground hover:bg-accent/85">{playing ? <Pause /> : <Play />}</Button>
+            <Button variant="ghost" size="icon" onClick={() => changeTrack(1)} aria-label="Next track" className="rounded-none"><SkipForward /></Button>
+            <Volume2 className="ml-1 hidden h-4 w-4 text-muted-foreground sm:block" aria-hidden="true" />
+          </div>
+        </div>
+      </section>
 
       {activeWork && (
         <div role="dialog" aria-modal="true" aria-label={activeWork.title} onClick={() => setActiveWork(null)} className="fixed inset-0 z-50 flex items-center justify-center bg-background/95 p-4 backdrop-blur-md">
