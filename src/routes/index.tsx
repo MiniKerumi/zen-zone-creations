@@ -107,6 +107,7 @@ function Index() {
           <div className="hidden items-center gap-7 text-sm font-semibold uppercase md:flex">
             <a href="#about" className="transition-colors hover:text-primary">About</a>
             <a href="#works" className="transition-colors hover:text-primary">Works</a>
+            <a href="#animation" className="transition-colors hover:text-primary">Animation</a>
             <a href="#tools" className="transition-colors hover:text-primary">Tools</a>
           </div>
           <span className="border border-accent/70 bg-accent px-3 py-1 text-xs font-bold uppercase text-accent-foreground">Personal Portfolio</span>
