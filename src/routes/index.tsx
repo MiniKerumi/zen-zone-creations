@@ -17,6 +17,8 @@ import vr from "@/assets/vr.mp3.asset.json";
 import hia from "@/assets/hia.mp3.asset.json";
 import strivingPort from "@/assets/striving-port.mp3.asset.json";
 import reveriePassion from "@/assets/reverie-passion.mp3.asset.json";
+import sigridVideo from "@/assets/sigrid.mp4.asset.json";
+import sigridPoster from "@/assets/sigrid-poster.jpg.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -105,20 +107,21 @@ function Index() {
           <div className="hidden items-center gap-7 text-sm font-semibold uppercase md:flex">
             <a href="#about" className="transition-colors hover:text-primary">About</a>
             <a href="#works" className="transition-colors hover:text-primary">Works</a>
+            <a href="#animation" className="transition-colors hover:text-primary">Animation</a>
             <a href="#tools" className="transition-colors hover:text-primary">Tools</a>
           </div>
           <span className="border border-accent/70 bg-accent px-3 py-1 text-xs font-bold uppercase text-accent-foreground">Personal Portfolio</span>
         </div>
       </nav>
 
-      <header id="top" className="relative flex min-h-[92vh] items-end overflow-hidden border-b border-border">
-        <img src={zenara.url} alt="Professor Zenara character portrait by MiniKerumi" className="hero-drift absolute inset-0 h-full w-full object-cover object-[64%_center]" />
+      <header id="top" className="relative flex min-h-[88vh] items-end overflow-hidden border-b border-border">
+        <img src={zenara.url} alt="Professor Zenara character portrait by MiniKerumi" className="hero-drift absolute inset-0 h-full w-full object-cover object-[64%_top]" />
         <div className="scanline" aria-hidden="true" />
-        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/65 to-background/10" />
+        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/70 to-background/20" />
         <div className="absolute inset-x-0 top-16 h-px bg-primary/50" />
-        <div className="relative z-10 mx-auto w-full max-w-[92rem] px-5 pb-16 pt-32 lg:px-10 lg:pb-20" data-reveal>
+        <div className="relative z-10 mx-auto w-full max-w-[92rem] px-5 pb-16 pt-28 lg:px-10 lg:pb-20" data-reveal>
           <p className="mb-4 flex items-center gap-3 text-xs font-bold uppercase text-primary"><span className="h-px w-10 bg-primary" /> Digital practice log · 2026</p>
-          <h1 className="max-w-4xl font-display text-[clamp(5rem,15vw,13rem)] leading-[0.78] tracking-normal text-foreground">MINI<br /><span className="text-transparent [-webkit-text-stroke:2px_var(--color-foreground)]">KERUMI</span></h1>
+          <h1 className="max-w-4xl font-display text-[clamp(4.5rem,12vw,10rem)] leading-[0.8] tracking-normal text-foreground">MINI<br /><span className="text-transparent [-webkit-text-stroke:2px_var(--color-foreground)]">KERUMI</span></h1>
           <div className="mt-8 flex flex-col items-start gap-6 sm:flex-row sm:items-end sm:gap-12">
             <div>
               <p className="text-lg font-semibold uppercase sm:text-2xl">GFX Artist · Animator</p>
@@ -151,7 +154,7 @@ function Index() {
           <div className="grid auto-rows-[18rem] grid-cols-1 gap-4 md:grid-cols-3 md:auto-rows-[22rem]">
             {works.map((work, index) => (
               <article key={work.title} data-reveal style={{ "--reveal-delay": `${index * 70}ms` } as React.CSSProperties} className={`art-card group relative overflow-hidden border border-border bg-card ${work.span}`}>
-                <img src={work.src} alt={work.alt} loading={index > 1 ? "lazy" : "eager"} className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.025]" />
+                <img src={work.src} alt={work.alt} loading={index > 1 ? "lazy" : "eager"} className="h-full w-full object-cover object-[center_25%] transition duration-500 group-hover:scale-[1.025]" />
                 <div className="absolute inset-x-0 bottom-0 flex items-end justify-between bg-gradient-to-t from-background via-background/75 to-transparent p-5 pt-20">
                   <div><p className="text-xs font-semibold uppercase text-primary">{work.tag}</p><h3 className="font-display text-3xl tracking-normal">{work.title}</h3></div>
                   <Button variant="outline" size="icon" onClick={() => setActiveWork(work)} aria-label={`Open ${work.title}`} className="rounded-none border-foreground/50 bg-background/70 hover:bg-primary hover:text-primary-foreground"><Expand /></Button>
@@ -162,9 +165,48 @@ function Index() {
         </div>
       </section>
 
+      <section id="animation" className="border-y border-border bg-card/60 py-20 lg:py-28">
+        <div className="mx-auto max-w-[92rem] px-5 lg:px-10">
+          <div className="mb-10 flex items-end justify-between border-b border-border pb-5" data-reveal>
+            <div><p className="text-xs font-bold uppercase text-secondary">03 / Animation</p><h2 className="mt-2 font-display text-6xl tracking-normal sm:text-8xl">IN MOTION</h2></div>
+            <span className="hidden text-sm font-semibold text-muted-foreground sm:block">01 CLIP / FIRST ANIMATION</span>
+          </div>
+          <div className="grid gap-8 lg:grid-cols-[1.6fr_1fr]" data-reveal>
+            <div className="art-card relative min-w-0 overflow-hidden border border-border bg-background">
+              <video
+                src={sigridVideo.url}
+                poster={sigridPoster.url}
+                controls
+                loop
+                muted
+                playsInline
+                preload="metadata"
+                aria-label="Sigrid animation by MiniKerumi"
+                className="aspect-video h-auto w-full object-cover"
+              />
+            </div>
+            <div className="min-w-0 self-center border-l border-secondary pl-6">
+              <p className="text-xs font-bold uppercase text-primary">First Animation</p>
+              <h3 className="mt-2 font-display text-6xl tracking-normal">SIGRID</h3>
+              <p className="mt-4 text-base leading-7 text-muted-foreground">My first animation test—focused on timing, camera feel, and lighting mood. Rendered in Blender with Goo Engine.</p>
+              <div className="marquee mt-8 border-y border-border py-2">
+                <div className="marquee-track gap-6 text-sm font-bold uppercase text-muted-foreground">
+                  {Array.from({ length: 2 }).map((_, loop) => (
+                    <span key={loop} className="flex shrink-0 gap-6 pr-6">
+                      <span>Sigrid</span><span className="text-primary">·</span><span>Motion Study</span><span className="text-secondary">·</span><span>Blender</span><span className="text-accent">·</span><span>Goo Engine</span><span className="text-primary">·</span>
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
       <section id="tools" className="border-y border-border bg-card py-20" data-reveal>
         <div className="mx-auto grid max-w-[92rem] gap-12 px-5 md:grid-cols-2 lg:px-10">
-          <div><p className="text-xs font-bold uppercase text-secondary">03 / Practice & Tools</p><h2 className="mt-3 font-display text-6xl tracking-normal sm:text-8xl">BUILT TO<br />LEARN.</h2></div>
+          <div><p className="text-xs font-bold uppercase text-secondary">04 / Practice & Tools</p><h2 className="mt-3 font-display text-6xl tracking-normal sm:text-8xl">BUILT TO<br />LEARN.</h2></div>
           <div className="self-end">
             <p className="max-w-xl text-xl leading-relaxed">Every piece is a personal study in composition, posing, lighting, and atmosphere—made while learning and enjoying the process.</p>
             <div className="mt-8 flex gap-3"><span className="border border-primary px-5 py-3 font-display text-2xl text-primary">BLENDER</span><span className="border border-secondary px-5 py-3 font-display text-2xl text-secondary">GOO ENGINE</span></div>
@@ -191,8 +233,8 @@ function Index() {
           onEnded={() => changeTrack(1)}
         />
         <div className="flex h-[76px] items-center gap-3 p-2 sm:gap-4">
-          <div className="relative h-[58px] w-[58px] shrink-0 overflow-hidden border border-foreground/30">
-            <img src={bgmCover.url} alt="Background music cover artwork" className={`h-full w-full object-cover ${playing ? "cover-pulse" : ""}`} />
+          <div className={`cover-frame h-[58px] w-[58px] shrink-0 overflow-hidden border border-foreground/30 ${playing ? "is-playing" : ""}`}>
+            <img src={bgmCover.url} alt="Background music cover artwork" className="h-full w-full object-cover object-center" />
             <Music2 className="absolute bottom-1 right-1 h-4 w-4 bg-background/80 p-0.5 text-accent" aria-hidden="true" />
           </div>
           <div className="min-w-0 flex-1">
