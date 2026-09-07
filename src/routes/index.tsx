@@ -233,8 +233,8 @@ function Index() {
           onEnded={() => changeTrack(1)}
         />
         <div className="flex h-[76px] items-center gap-3 p-2 sm:gap-4">
-          <div className="relative h-[58px] w-[58px] shrink-0 overflow-hidden border border-foreground/30">
-            <img src={bgmCover.url} alt="Background music cover artwork" className={`h-full w-full object-cover ${playing ? "cover-pulse" : ""}`} />
+          <div className={`cover-frame h-[58px] w-[58px] shrink-0 overflow-hidden border border-foreground/30 ${playing ? "is-playing" : ""}`}>
+            <img src={bgmCover.url} alt="Background music cover artwork" className="h-full w-full object-cover object-center" />
             <Music2 className="absolute bottom-1 right-1 h-4 w-4 bg-background/80 p-0.5 text-accent" aria-hidden="true" />
           </div>
           <div className="min-w-0 flex-1">
