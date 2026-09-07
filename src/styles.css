@@ -198,7 +198,7 @@
   animation: cover-glow 2.4s ease-in-out infinite;
 }
 .marquee { overflow: hidden; }
-.marquee-track { display: flex; width: max-content; animation: marquee-slide 26s linear infinite; }
+.marquee-track { display: flex; width: max-content; animation: marquee-slide 60s linear infinite; }
 .marquee:hover .marquee-track { animation-play-state: paused; }
 
 .scanline {
