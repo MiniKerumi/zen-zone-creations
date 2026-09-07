@@ -115,13 +115,13 @@ function Index() {
       </nav>
 
       <header id="top" className="relative flex min-h-[88vh] items-end overflow-hidden border-b border-border">
-        <img src={zenara.url} alt="Professor Zenara character portrait by MiniKerumi" className="hero-drift absolute bottom-0 right-0 h-full w-auto object-contain object-bottom" />
+        <img src={zenara.url} alt="Professor Zenara character portrait by MiniKerumi" className="hero-drift absolute inset-0 h-full w-full object-cover object-[64%_top]" />
         <div className="scanline" aria-hidden="true" />
-        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/70 to-background/25" />
+        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/70 to-background/20" />
         <div className="absolute inset-x-0 top-16 h-px bg-primary/50" />
-        <div className="relative z-10 mx-auto w-full max-w-[92rem] px-5 pb-16 pt-32 lg:px-10 lg:pb-20" data-reveal>
+        <div className="relative z-10 mx-auto w-full max-w-[92rem] px-5 pb-16 pt-28 lg:px-10 lg:pb-20" data-reveal>
           <p className="mb-4 flex items-center gap-3 text-xs font-bold uppercase text-primary"><span className="h-px w-10 bg-primary" /> Digital practice log · 2026</p>
-          <h1 className="max-w-4xl font-display text-[clamp(5rem,15vw,13rem)] leading-[0.78] tracking-normal text-foreground">MINI<br /><span className="text-transparent [-webkit-text-stroke:2px_var(--color-foreground)]">KERUMI</span></h1>
+          <h1 className="max-w-4xl font-display text-[clamp(4.5rem,12vw,10rem)] leading-[0.8] tracking-normal text-foreground">MINI<br /><span className="text-transparent [-webkit-text-stroke:2px_var(--color-foreground)]">KERUMI</span></h1>
           <div className="mt-8 flex flex-col items-start gap-6 sm:flex-row sm:items-end sm:gap-12">
             <div>
               <p className="text-lg font-semibold uppercase sm:text-2xl">GFX Artist · Animator</p>
