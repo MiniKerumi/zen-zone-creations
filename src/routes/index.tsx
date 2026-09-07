@@ -3,22 +3,22 @@ import { ArrowDown, Expand, Music2, Pause, Play, SkipBack, SkipForward, Volume2,
 import { useEffect, useRef, useState } from "react";
 
 import { Button } from "@/components/ui/button";
-import zenara from "@/assets/zenara-light.png.asset.json";
-import crimson from "@/assets/crimson-elegance.png.asset.json";
-import dualSignal from "@/assets/dual-signal.png.asset.json";
-import cityPair from "@/assets/city-pair.png.asset.json";
-import firstGfx from "@/assets/first-gfx.png.asset.json";
-import afterHours from "@/assets/after-hours.png.asset.json";
-import bgmCover from "@/assets/bgm-cover.png.asset.json";
-import dailyLifeLeisure from "@/assets/daily-life-leisure.mp3.asset.json";
-import dailyLifeFreedom from "@/assets/daily-life-freedom.mp3.asset.json";
-import reverieSerenity from "@/assets/reverie-serenity.mp3.asset.json";
-import vr from "@/assets/vr.mp3.asset.json";
-import hia from "@/assets/hia.mp3.asset.json";
-import strivingPort from "@/assets/striving-port.mp3.asset.json";
-import reveriePassion from "@/assets/reverie-passion.mp3.asset.json";
-import sigridVideo from "@/assets/sigrid.mp4.asset.json";
-import sigridPoster from "@/assets/sigrid-poster.jpg.asset.json";
+import zenara from "@/assets/zenara-light.png";
+import crimson from "@/assets/crimson-elegance.png";
+import dualSignal from "@/assets/dual-signal.png";
+import cityPair from "@/assets/city-pair.png";
+import firstGfx from "@/assets/first-gfx.png";
+import afterHours from "@/assets/after-hours.png";
+import bgmCover from "@/assets/bgm-cover.png";
+import dailyLifeLeisure from "@/assets/daily-life-leisure.mp3";
+import dailyLifeFreedom from "@/assets/daily-life-freedom.mp3";
+import reverieSerenity from "@/assets/reverie-serenity.mp3";
+import vr from "@/assets/vr.mp3";
+import hia from "@/assets/hia.mp3";
+import strivingPort from "@/assets/striving-port.mp3";
+import reveriePassion from "@/assets/reverie-passion.mp3";
+import sigridVideo from "@/assets/sigrid.mp4";
+import sigridPoster from "@/assets/sigrid-poster.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
