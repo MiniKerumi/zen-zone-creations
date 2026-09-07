@@ -114,8 +114,8 @@ function Index() {
         </div>
       </nav>
 
-      <header id="top" className="relative flex min-h-[92vh] items-end overflow-hidden border-b border-border">
-        <img src={zenara.url} alt="Professor Zenara character portrait by MiniKerumi" className="hero-drift absolute bottom-0 right-0 h-[88%] w-auto max-w-[64%] object-contain object-bottom" />
+      <header id="top" className="relative flex min-h-[88vh] items-end overflow-hidden border-b border-border">
+        <img src={zenara.url} alt="Professor Zenara character portrait by MiniKerumi" className="hero-drift absolute bottom-0 right-0 h-full w-auto object-contain object-bottom" />
         <div className="scanline" aria-hidden="true" />
         <div className="absolute inset-0 bg-gradient-to-r from-background via-background/70 to-background/25" />
         <div className="absolute inset-x-0 top-16 h-px bg-primary/50" />
