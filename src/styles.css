@@ -162,9 +162,21 @@
   to { transform: translateY(100vh); }
 }
 
-@keyframes cover-pulse {
-  50% { transform: scale(1.06); filter: saturate(1.2); }
+@keyframes cover-glow {
+  0%, 100% { box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--color-primary) 55%, transparent); }
+  50% { box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--color-secondary) 75%, transparent); }
 }
+
+@keyframes hero-breathe {
+  0%, 100% { filter: saturate(1) contrast(1); }
+  50% { filter: saturate(1.12) contrast(1.04); }
+}
+
+@keyframes marquee-slide {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
 
 [data-reveal] {
   opacity: 0;
