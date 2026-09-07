@@ -25,7 +25,7 @@ import bgmCover from "@/assets/bgm-cover.png";
 import dailyLifeLeisure from "@/assets/daily-life-leisure.mp3";
 import dailyLifeFreedom from "@/assets/daily-life-freedom.mp3";
 import reverieSerenity from "@/assets/reverie-serenity.mp3";
-import vr from "@/assets/Vr - Sān-Z (youtube).mp3";
+import vr from "@/assets/vr.mp3";
 import hia from "@/assets/hia.mp3";
 import strivingPort from "@/assets/striving-port.mp3";
 import reveriePassion from "@/assets/reverie-passion.mp3";
