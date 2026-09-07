@@ -185,7 +185,7 @@ function Index() {
                 className="h-full w-full object-cover"
               />
             </div>
-            <div className="self-center border-l border-secondary pl-6">
+            <div className="min-w-0 self-center border-l border-secondary pl-6">
               <p className="text-xs font-bold uppercase text-primary">First Animation</p>
               <h3 className="mt-2 font-display text-6xl tracking-normal">SIGRID</h3>
               <p className="mt-4 text-base leading-7 text-muted-foreground">My first animation test—focused on timing, camera feel, and lighting mood. Rendered in Blender with Goo Engine.</p>
