@@ -17,6 +17,8 @@ import vr from "@/assets/vr.mp3.asset.json";
 import hia from "@/assets/hia.mp3.asset.json";
 import strivingPort from "@/assets/striving-port.mp3.asset.json";
 import reveriePassion from "@/assets/reverie-passion.mp3.asset.json";
+import sigridVideo from "@/assets/sigrid.mp4.asset.json";
+import sigridPoster from "@/assets/sigrid-poster.jpg.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
