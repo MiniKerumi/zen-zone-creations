@@ -182,7 +182,7 @@ function Index() {
                 playsInline
                 preload="metadata"
                 aria-label="Sigrid animation by MiniKerumi"
-                className="h-full w-full object-cover"
+                className="aspect-video h-auto w-full object-cover"
               />
             </div>
             <div className="min-w-0 self-center border-l border-secondary pl-6">
