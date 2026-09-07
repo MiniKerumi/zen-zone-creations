@@ -15,7 +15,7 @@ import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 
 import zenara from "@/assets/zenara-light.png";
-import crimson from "@/assets/crimson-elegance.webp";
+import crimson from "@/assets/crimson-elegance.png";
 import dualSignal from "@/assets/dual-signal.png";
 import cityPair from "@/assets/city-pair.png";
 import firstGfx from "@/assets/first-gfx.png";
