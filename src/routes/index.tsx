@@ -154,7 +154,7 @@ function Index() {
           <div className="grid auto-rows-[18rem] grid-cols-1 gap-4 md:grid-cols-3 md:auto-rows-[22rem]">
             {works.map((work, index) => (
               <article key={work.title} data-reveal style={{ "--reveal-delay": `${index * 70}ms` } as React.CSSProperties} className={`art-card group relative overflow-hidden border border-border bg-card ${work.span}`}>
-                <img src={work.src} alt={work.alt} loading={index > 1 ? "lazy" : "eager"} className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.025]" />
+                <img src={work.src} alt={work.alt} loading={index > 1 ? "lazy" : "eager"} className="h-full w-full object-cover object-[center_25%] transition duration-500 group-hover:scale-[1.025]" />
                 <div className="absolute inset-x-0 bottom-0 flex items-end justify-between bg-gradient-to-t from-background via-background/75 to-transparent p-5 pt-20">
                   <div><p className="text-xs font-semibold uppercase text-primary">{work.tag}</p><h3 className="font-display text-3xl tracking-normal">{work.title}</h3></div>
                   <Button variant="outline" size="icon" onClick={() => setActiveWork(work)} aria-label={`Open ${work.title}`} className="rounded-none border-foreground/50 bg-background/70 hover:bg-primary hover:text-primary-foreground"><Expand /></Button>
