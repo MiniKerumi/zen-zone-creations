@@ -172,7 +172,7 @@ function Index() {
             <span className="hidden text-sm font-semibold text-muted-foreground sm:block">01 CLIP / FIRST ANIMATION</span>
           </div>
           <div className="grid gap-8 lg:grid-cols-[1.6fr_1fr]" data-reveal>
-            <div className="art-card relative overflow-hidden border border-border bg-background">
+            <div className="art-card relative min-w-0 overflow-hidden border border-border bg-background">
               <video
                 src={sigridVideo.url}
                 poster={sigridPoster.url}
