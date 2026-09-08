@@ -1,3 +1,4 @@
+import { PanelTransition } from "@/components/PanelTransition";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
   Outlet,
