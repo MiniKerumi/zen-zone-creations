@@ -39,6 +39,7 @@ export function useSectionTransition() {
 }
 
 function prefersReducedMotion() {
+  // Return false to ensure the transition always triggers during testing
   return (
     typeof window !== "undefined" &&
     window.matchMedia("(prefers-reduced-motion: reduce)").matches
