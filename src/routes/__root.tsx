@@ -1,4 +1,6 @@
 import { PanelTransition } from "@/components/PanelTransition";
+import { MusicPlayer } from "@/components/MusicPlayer";
+import { SiteFooter, SiteNav } from "@/components/SiteNav";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
   Outlet,
@@ -124,7 +126,12 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <PanelTransition>
-        <Outlet />
+        <SiteNav />
+        <main className="pt-16">
+          <Outlet />
+        </main>
+        <SiteFooter />
+        <MusicPlayer />
       </PanelTransition>
     </QueryClientProvider>
   );
