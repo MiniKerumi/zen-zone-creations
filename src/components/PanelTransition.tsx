@@ -165,7 +165,7 @@ export function TransitionLink({
     <Link
       to={to}
       className={className}
-      activeProps={activeClassName ? { className: activeClassName } : undefined}
+      activeProps={{ className: activeClassName ?? "" }}
       onClick={(event) => {
         if (event.metaKey || event.ctrlKey || event.shiftKey || event.button !== 0) {
           return;

@@ -224,7 +224,92 @@
 .art-card:hover::before { border-color: var(--color-primary); box-shadow: inset 0 1px 20px color-mix(in oklab, var(--color-primary) 20%, transparent); }
 .music-range { height: 3px; cursor: pointer; accent-color: var(--color-accent); }
 
+/* ZZZ-style panel transition */
+.panel-stage {
+  position: fixed;
+  inset: -12vh -14vw;
+  z-index: 100;
+  display: none;
+  pointer-events: none;
+}
+
+.panel-stage.is-active {
+  display: block;
+  pointer-events: all;
+}
+
+.tp-panel {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: calc(var(--i) * 20%);
+  width: 24%;
+  transform: translateX(140%) skewX(-9deg);
+  background: linear-gradient(180deg, oklch(0.16 0.008 285), oklch(0.23 0.01 285));
+  border-left: 2px solid color-mix(in oklab, var(--color-primary) 70%, transparent);
+  border-right: 2px solid color-mix(in oklab, var(--color-secondary) 60%, transparent);
+}
+
+.tp-panel:nth-child(even) {
+  border-left-color: color-mix(in oklab, var(--color-accent) 70%, transparent);
+}
+
+.panel-stage.tp-in .tp-panel {
+  animation: panel-sweep-in 300ms cubic-bezier(.16,.9,.24,1) both;
+  animation-delay: calc(var(--i) * 55ms);
+}
+
+.panel-stage.tp-hold .tp-panel {
+  transform: translateX(0) skewX(-9deg);
+}
+
+.panel-stage.tp-out .tp-panel {
+  transform: translateX(140%) skewX(-9deg);
+  animation: panel-sweep-out 300ms cubic-bezier(.6,0,.85,.4) both;
+  animation-delay: calc((4 - var(--i)) * 55ms);
+}
+
+@keyframes panel-sweep-in {
+  from { transform: translateX(140%) skewX(-9deg); }
+  to { transform: translateX(0) skewX(-9deg); }
+}
+
+@keyframes panel-sweep-out {
+  from { transform: translateX(0) skewX(-9deg); }
+  to { transform: translateX(140%) skewX(-9deg); }
+}
+
+.tp-stamp {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  animation: stamp-in 260ms cubic-bezier(.12,.9,.2,1) both;
+}
+
+.tp-stamp-name {
+  font-size: clamp(2.5rem, 9vw, 6rem);
+  letter-spacing: 0.06em;
+  color: var(--color-foreground);
+  text-transform: uppercase;
+}
+
+.tp-stamp-rule {
+  width: clamp(6rem, 22vw, 18rem);
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-secondary), var(--color-accent));
+}
+
+@keyframes stamp-in {
+  from { opacity: 0; transform: scale(1.18); filter: blur(10px); }
+  to { opacity: 1; transform: scale(1); filter: blur(0); }
+}
+
 @media (prefers-reduced-motion: reduce) {
+  .panel-stage { display: none !important; }
   *, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
   [data-reveal] { opacity: 1; transform: none; }
 }
