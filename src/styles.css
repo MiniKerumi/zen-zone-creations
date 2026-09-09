@@ -229,13 +229,18 @@
   position: fixed;
   inset: -12vh -14vw;
   z-index: 100;
-  display: none;
+  visibility: hidden;
+  opacity: 0;
   pointer-events: none;
+  overflow: hidden;
+  transition: opacity 120ms linear, visibility 0s linear 120ms;
 }
 
 .panel-stage.is-active {
-  display: block;
+  visibility: visible;
+  opacity: 1;
   pointer-events: all;
+  transition-delay: 0s;
 }
 
 .tp-panel {
@@ -329,7 +334,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .panel-stage { display: none !important; }
+  .panel-stage { visibility: hidden !important; opacity: 0 !important; }
   *, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
   [data-reveal] { opacity: 1; transform: none; }
 }

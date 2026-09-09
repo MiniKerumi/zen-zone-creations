@@ -52,47 +52,60 @@ export function PanelTransition({ children }: { children: ReactNode }) {
   const busy = useRef(false);
   const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
 
-  const clearTimers = () => {
-    timers.current.forEach(clearTimeout);
+  const clearTimers = useCallback(() => {
+    timers.current.forEach((timer) => window.clearTimeout(timer));
     timers.current = [];
-  };
-
-  useEffect(() => clearTimers, []);
-
-  const later = (fn: () => void, delay: number) => {
-    timers.current.push(setTimeout(fn, delay));
-  };
-
-  /** Plays cover -> (optional swap) -> uncover. */
-  const play = useCallback((swap?: () => void) => {
-    if (busy.current) return;
-
-    busy.current = true;
-
-    if (prefersReducedMotion()) {
-      swap?.();
-      busy.current = false;
-      return;
-    }
-
-    setPhase("in");
-
-    later(() => {
-      setPhase("hold");
-      swap?.();
-      window.scrollTo({ top: 0, behavior: "auto" });
-    }, COVER_TIME);
-
-    later(() => setPhase("out"), COVER_TIME + HOLD_TIME);
-
-    later(
-      () => {
-        setPhase("idle");
-        busy.current = false;
-      },
-      COVER_TIME + HOLD_TIME + COVER_TIME,
-    );
   }, []);
+
+  useEffect(() => {
+    return () => {
+      clearTimers();
+      busy.current = false;
+    };
+  }, [clearTimers]);
+
+  const later = useCallback((fn: () => void, delay: number) => {
+    const timer = window.setTimeout(() => {
+      timers.current = timers.current.filter((activeTimer) => activeTimer !== timer);
+      fn();
+    }, delay);
+
+    timers.current.push(timer);
+  }, []);
+
+  const play = useCallback(
+    (swap?: () => void) => {
+      if (busy.current) return;
+
+      busy.current = true;
+
+      if (prefersReducedMotion()) {
+        swap?.();
+        busy.current = false;
+        return;
+      }
+
+      clearTimers();
+      setPhase("in");
+
+      later(() => {
+        setPhase("hold");
+        swap?.();
+        window.scrollTo({ top: 0, behavior: "auto" });
+      }, COVER_TIME);
+
+      later(() => setPhase("out"), COVER_TIME + HOLD_TIME);
+
+      later(
+        () => {
+          setPhase("idle");
+          busy.current = false;
+        },
+        COVER_TIME + HOLD_TIME + COVER_TIME,
+      );
+    },
+    [clearTimers, later],
+  );
 
   const go = useCallback(
     (to: SectionPath) => {
