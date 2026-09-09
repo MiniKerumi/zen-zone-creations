@@ -50,9 +50,10 @@ export function SiteNav() {
         </div>
 
 
-        <span className="border border-accent/70 bg-accent px-3 py-1 text-xs font-bold uppercase text-accent-foreground">
+        <span className="hidden border border-accent/70 bg-accent px-3 py-1 text-xs font-bold uppercase text-accent-foreground sm:inline-block">
           Personal Portfolio
         </span>
+
       </div>
     </nav>
   );
