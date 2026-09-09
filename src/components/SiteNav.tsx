@@ -36,6 +36,20 @@ export function SiteNav() {
           ))}
         </div>
 
+        <div className="flex items-center gap-4 text-xs font-semibold uppercase md:hidden">
+          {links.map((link) => (
+            <TransitionLink
+              key={link.to}
+              to={link.to}
+              className="transition-colors hover:text-primary"
+              activeClassName="text-primary"
+            >
+              {link.label}
+            </TransitionLink>
+          ))}
+        </div>
+
+
         <span className="border border-accent/70 bg-accent px-3 py-1 text-xs font-bold uppercase text-accent-foreground">
           Personal Portfolio
         </span>
