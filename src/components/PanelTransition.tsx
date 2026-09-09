@@ -38,14 +38,6 @@ export function useSectionTransition() {
   return context;
 }
 
-function prefersReducedMotion() {
-  // Return false to ensure the transition always triggers during testing
-  return (
-    typeof window !== "undefined" &&
-    window.matchMedia("(prefers-reduced-motion: reduce)").matches
-  );
-}
-
 export function PanelTransition({ children }: { children: ReactNode }) {
   const navigate = useNavigate();
   const [phase, setPhase] = useState<Phase>("idle");
@@ -78,12 +70,6 @@ export function PanelTransition({ children }: { children: ReactNode }) {
       if (busy.current) return;
 
       busy.current = true;
-
-      if (prefersReducedMotion()) {
-        swap?.();
-        busy.current = false;
-        return;
-      }
 
       clearTimers();
       setPhase("in");
