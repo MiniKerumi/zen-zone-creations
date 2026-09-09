@@ -14,10 +14,10 @@ export type SectionPath = "/" | "/about" | "/works" | "/animation" | "/tools";
 type Phase = "idle" | "in" | "hold" | "out";
 
 const PANEL_COUNT = 5;
-const STAGGER = 55;
-const PANEL_DURATION = 300;
-const COVER_TIME = PANEL_DURATION + STAGGER * (PANEL_COUNT - 1); // ~520ms
-const HOLD_TIME = 300;
+const STAGGER = 70;
+const PANEL_DURATION = 480;
+const COVER_TIME = PANEL_DURATION + STAGGER * (PANEL_COUNT - 1); // ~760ms
+const HOLD_TIME = 420;
 
 type TransitionContextValue = {
   phase: Phase;
@@ -138,8 +138,9 @@ export function PanelTransition({ children }: { children: ReactNode }) {
 
         {(phase === "hold" || phase === "out") && (
           <div className="tp-stamp">
+            <span className="tp-stamp-rule tp-stamp-rule-top" />
             <span className="tp-stamp-name font-display">MiniKerumi</span>
-            <span className="tp-stamp-rule" />
+            <span className="tp-stamp-rule tp-stamp-rule-bottom" />
           </div>
         )}
       </div>
