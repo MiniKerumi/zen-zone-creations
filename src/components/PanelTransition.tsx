@@ -43,7 +43,7 @@ export function PanelTransition({ children }: { children: ReactNode }) {
   const navigate = useNavigate();
   const [phase, setPhase] = useState<Phase>("idle");
   const busy = useRef(false);
-  const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
+  const timers = useRef<number[]>([]);
 
   const clearTimers = useCallback(() => {
     timers.current.forEach((timer) => window.clearTimeout(timer));
