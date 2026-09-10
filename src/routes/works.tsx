@@ -19,7 +19,7 @@ export const Route = createFileRoute("/works")({
       {
         property: "og:description",
         content:
-          "Frame by frame — six personal GFX studies rendered in Blender and Goo Engine.",
+          "Frame by frame: six personal GFX studies rendered in Blender and Goo Engine.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

@@ -15,7 +15,7 @@ export const Route = createFileRoute("/tools")({
       {
         property: "og:description",
         content:
-          "Built to learn — the tools and credits behind MiniKerumi's non-commercial portfolio.",
+          "Built to learn: the tools and credits behind MiniKerumi's non-commercial portfolio.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -50,7 +50,7 @@ function ToolsPage() {
           <div className="self-end">
             <p className="max-w-xl text-xl leading-relaxed">
               Every piece is a personal study in composition, posing, lighting,
-              and atmosphere—made while learning and enjoying the process.
+              and atmosphere, made while learning and enjoying the process.
             </p>
 
             <div className="mt-8 flex gap-3">
