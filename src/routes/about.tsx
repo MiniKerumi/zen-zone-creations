@@ -48,7 +48,7 @@ function AboutPage() {
 
         <div className="max-w-3xl self-end border-l border-primary pl-6 sm:pl-10">
           <p className="text-2xl font-medium leading-snug sm:text-4xl">
-            Hi, I’m MiniKerumi—a GFX artist and aspiring animator who creates
+            Hi, I’m MiniKerumi, a GFX artist and aspiring animator who creates
             for the joy of learning.
           </p>
 

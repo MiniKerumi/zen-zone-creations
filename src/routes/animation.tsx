@@ -8,13 +8,13 @@ import sigridPoster from "@/assets/sigrid-poster.jpg";
 export const Route = createFileRoute("/animation")({
   head: () => ({
     meta: [
-      { title: "Animation — Sigrid | MiniKerumi" },
+      { title: "Animation - Sigrid | MiniKerumi" },
       {
         name: "description",
         content:
           "Sigrid, MiniKerumi's first animation test focused on timing, camera feel, and lighting mood.",
       },
-      { property: "og:title", content: "Animation — Sigrid | MiniKerumi" },
+      { property: "og:title", content: "Animation - Sigrid | MiniKerumi" },
       {
         property: "og:description",
         content:
@@ -80,7 +80,7 @@ function AnimationPage() {
             </h3>
 
             <p className="mt-4 text-base leading-7 text-muted-foreground">
-              My first animation test—focused on timing, camera feel, and
+              My first animation test, focused on timing, camera feel, and
               lighting mood. Rendered in Blender with Goo Engine.
             </p>
 
