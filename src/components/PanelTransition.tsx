@@ -18,7 +18,7 @@ const STAGGER = 55;
 const PANEL_DURATION = 360;
 const COVER_TIME = PANEL_DURATION + STAGGER * (PANEL_COUNT - 1);
 const HOLD_TIME = 220;
-const OUT_DURATION = 400;
+const OUT_DURATION = 400 + STAGGER * (PANEL_COUNT - 1);
 
 type TransitionContextValue = {
   phase: Phase;
