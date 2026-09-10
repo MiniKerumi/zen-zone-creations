@@ -14,11 +14,11 @@ export type SectionPath = "/" | "/about" | "/works" | "/animation" | "/tools";
 type Phase = "idle" | "in" | "hold" | "out";
 
 const PANEL_COUNT = 5;
-const STAGGER = 70;
-const PANEL_DURATION = 480;
-const COVER_TIME = PANEL_DURATION + STAGGER * (PANEL_COUNT - 1); // ~760ms
-const HOLD_TIME = 420;
-const OUT_DURATION = 520;
+const STAGGER = 55;
+const PANEL_DURATION = 360;
+const COVER_TIME = PANEL_DURATION + STAGGER * (PANEL_COUNT - 1);
+const HOLD_TIME = 220;
+const OUT_DURATION = 400;
 
 type TransitionContextValue = {
   phase: Phase;
@@ -54,6 +54,7 @@ export function PanelTransition({ children }: { children: ReactNode }) {
     return () => {
       clearTimers();
       busy.current = false;
+      document.documentElement.classList.remove("route-transitioning");
     };
   }, [clearTimers]);
 
@@ -73,6 +74,7 @@ export function PanelTransition({ children }: { children: ReactNode }) {
       busy.current = true;
 
       clearTimers();
+      document.documentElement.classList.add("route-transitioning");
       setPhase("in");
 
       later(() => {
@@ -87,6 +89,7 @@ export function PanelTransition({ children }: { children: ReactNode }) {
         () => {
           setPhase("idle");
           busy.current = false;
+          document.documentElement.classList.remove("route-transitioning");
         },
         COVER_TIME + HOLD_TIME + OUT_DURATION,
       );
