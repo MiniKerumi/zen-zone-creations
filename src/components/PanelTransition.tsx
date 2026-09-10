@@ -29,14 +29,26 @@ type TransitionContextValue = {
 
 const TransitionContext = createContext<TransitionContextValue | null>(null);
 
-export function useSectionTransition() {
+export function useSectionTransition(): TransitionContextValue {
   const context = useContext(TransitionContext);
+  const navigate = useNavigate();
 
-  if (!context) {
-    throw new Error("useSectionTransition must be used inside <PanelTransition>");
-  }
+  const fallbackGo = useCallback(
+    (to: SectionPath) => {
+      void navigate({ to });
+    },
+    [navigate],
+  );
 
-  return context;
+  // If the provider isn't reachable (e.g. a code-split boundary), still allow
+  // plain navigation instead of crashing the page.
+  return (
+    context ?? {
+      phase: "idle" as Phase,
+      go: fallbackGo,
+      isBusy: () => false,
+    }
+  );
 }
 
 export function PanelTransition({ children }: { children: ReactNode }) {
