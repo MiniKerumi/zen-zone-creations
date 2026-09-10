@@ -14,11 +14,11 @@ export type SectionPath = "/" | "/about" | "/works" | "/animation" | "/tools";
 type Phase = "idle" | "in" | "hold" | "out";
 
 const PANEL_COUNT = 5;
-const STAGGER = 55;
-const PANEL_DURATION = 360;
+const STAGGER = 60;
+const PANEL_DURATION = 420;
 const COVER_TIME = PANEL_DURATION + STAGGER * (PANEL_COUNT - 1);
-const HOLD_TIME = 220;
-const OUT_DURATION = 400 + STAGGER * (PANEL_COUNT - 1);
+const HOLD_TIME = 650;
+const OUT_DURATION = 460 + STAGGER * (PANEL_COUNT - 1);
 
 type TransitionContextValue = {
   phase: Phase;
