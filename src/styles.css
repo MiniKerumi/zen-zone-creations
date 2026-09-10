@@ -262,6 +262,12 @@
   box-shadow:
     -18px 0 40px color-mix(in oklab, var(--color-primary) 28%, transparent),
     0 0 0 1px oklch(0 0 0 / 0.6);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.panel-stage.tp-in .tp-panel,
+.panel-stage.tp-out .tp-panel {
   will-change: transform;
 }
 
@@ -287,12 +293,10 @@
 
 .panel-stage.tp-hold .tp-panel {
   transform: translateX(0) skewX(-9deg);
-  animation: panel-settle 280ms cubic-bezier(.34,1.56,.64,1) both;
 }
 
 .panel-stage.tp-out .tp-panel {
-  transform: translateX(140%) skewX(-9deg);
-  animation: panel-sweep-out 440ms cubic-bezier(.36,0,.16,1) both;
+  animation: panel-sweep-out 520ms cubic-bezier(.36,0,.16,1) both;
   animation-delay: calc(var(--i) * 50ms);
 }
 
@@ -302,16 +306,16 @@
   100% { transform: translateX(0) skewX(-9deg); }
 }
 
-@keyframes panel-settle {
-  0% { transform: translateX(0) skewX(-9deg); }
-  50% { transform: translateX(1.5%) skewX(-11deg); }
-  100% { transform: translateX(0) skewX(-9deg); }
-}
-
 @keyframes panel-sweep-out {
   0% { transform: translateX(0) skewX(-9deg); }
   100% { transform: translateX(140%) skewX(-9deg); }
 }
+
+.panel-stage.tp-out .tp-panel:nth-child(1) { animation-delay: 0ms; }
+.panel-stage.tp-out .tp-panel:nth-child(2) { animation-delay: 50ms; }
+.panel-stage.tp-out .tp-panel:nth-child(3) { animation-delay: 100ms; }
+.panel-stage.tp-out .tp-panel:nth-child(4) { animation-delay: 150ms; }
+.panel-stage.tp-out .tp-panel:nth-child(5) { animation-delay: 200ms; }
 
 .tp-stamp {
   position: absolute;
@@ -343,14 +347,14 @@
 .tp-stamp-rule-bottom { animation-delay: 180ms; }
 
 @keyframes stamp-in {
-  0% { opacity: 0; transform: scale(1.3) translateY(10px); filter: blur(14px); }
-  60% { opacity: 1; filter: blur(2px); }
+  0% { opacity: 0; transform: scale(1.25) translateY(8px); filter: blur(8px); }
+  60% { opacity: 1; filter: blur(1px); }
   100% { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
 }
 
 @keyframes stamp-glow {
-  0%, 100% { text-shadow: 0 0 20px color-mix(in oklab, var(--color-primary) 40%, transparent); }
-  50% { text-shadow: 0 0 30px color-mix(in oklab, var(--color-secondary) 50%, transparent); }
+  0%, 100% { text-shadow: 0 0 18px color-mix(in oklab, var(--color-primary) 40%, transparent); }
+  50% { text-shadow: 0 0 24px color-mix(in oklab, var(--color-secondary) 50%, transparent); }
 }
 
 @keyframes rule-extend {

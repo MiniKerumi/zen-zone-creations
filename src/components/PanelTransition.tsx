@@ -18,6 +18,7 @@ const STAGGER = 70;
 const PANEL_DURATION = 480;
 const COVER_TIME = PANEL_DURATION + STAGGER * (PANEL_COUNT - 1); // ~760ms
 const HOLD_TIME = 420;
+const OUT_DURATION = 520;
 
 type TransitionContextValue = {
   phase: Phase;
@@ -87,7 +88,7 @@ export function PanelTransition({ children }: { children: ReactNode }) {
           setPhase("idle");
           busy.current = false;
         },
-        COVER_TIME + HOLD_TIME + COVER_TIME,
+        COVER_TIME + HOLD_TIME + OUT_DURATION,
       );
     },
     [clearTimers, later],

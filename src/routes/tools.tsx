@@ -74,7 +74,9 @@ function ToolsPage() {
 
           <p className="max-w-5xl text-sm leading-6 text-muted-foreground">
             All compositions, lighting, posing, and renders shown here were
-            created by MiniKerumi. Character designs, 3D models, and related
+            created by MiniKerumi. None of my works use or will ever use AI —
+            every piece is hand-crafted through manual composition, lighting,
+            and rendering. Character designs, 3D models, and related
             intellectual property belong to their respective owners and
             creators. This is a non-commercial fan portfolio created for
             practice and personal expression. No official affiliation or
